@@ -1,4 +1,1 @@
 django~=4.0
-djangorestframework
-markdown
-django-filter
