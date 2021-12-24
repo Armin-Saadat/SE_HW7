@@ -1,6 +1,6 @@
 FROM python:3.10
 
-ENV WORKDIR=/opt/account
+ENV WORKDIR=/opt/prescription
 
 ADD requirements.txt $WORKDIR/requirements.txt
 RUN pip install -r $WORKDIR/requirements.txt

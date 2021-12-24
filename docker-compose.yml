@@ -6,6 +6,12 @@ services:
     restart: always
     volumes:
       - ./storage/account:/opt/account/db
+  prescription:
+    build: prescription
+    image: prescription:latest
+    restart: always
+    volumes:
+      - ./storage/prescription:/opt/prescription/db
   nginx:
     image: nginx
     depends_on:

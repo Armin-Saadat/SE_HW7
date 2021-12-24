@@ -43,7 +43,7 @@ class AuthorizeView(APIView):
         return Response(
             headers={
                 'x-name': request.user.first_name,
-                'x-role': 'admin' if request.user.is_superuser else request.user.role ,
+                'x-role': 'admin' if request.user.is_superuser else request.user.role,
             },
             status=HTTP_200_OK,
         )
