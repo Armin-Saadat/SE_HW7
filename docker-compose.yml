@@ -1,0 +1,16 @@
+version: "2.7"
+services:
+  account:
+    build: account
+    image: account:latest
+    restart: always
+    volumes:
+      - ./storage/account:/opt/account/db
+  nginx:
+    image: nginx
+    depends_on:
+      - account
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+    ports:
+      - "80:80"
