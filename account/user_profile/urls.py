@@ -3,7 +3,8 @@ from django.urls import path
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 from .views import SingUpView, AuthorizeView, RetrieveUpdateMyProfileAPIView, \
-    ListDoctorAPIView, ListPatientAPIView, RetrieveProfileAPIView
+    ListDoctorAPIView, ListPatientAPIView, RetrieveProfileAPIView, DoctorCount, \
+    PatientCount
 
 urlpatterns = [
     path('signup/', SingUpView.as_view(), name='signup'),
@@ -14,4 +15,6 @@ urlpatterns = [
     path('profile/<int:username>/', RetrieveProfileAPIView.as_view(), name='profile'),
     path('doctor/', ListDoctorAPIView.as_view(), name='doctor'),
     path('patient/', ListPatientAPIView.as_view(), name='patient'),
+    path('doctor/count/', DoctorCount.as_view(), name='doctor-count'),
+    path('patient/count/', PatientCount.as_view(), name='patient-count'),
 ]

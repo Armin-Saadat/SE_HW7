@@ -1,7 +1,9 @@
+from datetime import datetime
+
 from django.contrib.auth.models import update_last_login
 from rest_framework.generics import CreateAPIView, RetrieveUpdateAPIView, \
-    ListAPIView, RetrieveAPIView
-from rest_framework.permissions import IsAuthenticated
+    ListAPIView, RetrieveAPIView, GenericAPIView
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.response import Response
 from rest_framework.status import HTTP_201_CREATED, HTTP_200_OK
 from rest_framework.views import APIView
@@ -78,3 +80,21 @@ class ListPatientAPIView(ListAPIView):
     permission_classes = [IsAuthenticated]
     serializer_class = ProfileSerializer
     queryset = User.objects.filter(role=UserRole.PATIENT)
+
+
+class PatientCount(GenericAPIView):
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated, IsAdminUser]
+
+    def get(self, request):
+        today = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
+        return Response(data=User.objects.filter(role=UserRole.PATIENT, date_joined__gte=today).count())
+
+
+class DoctorCount(GenericAPIView):
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated, IsAdminUser]
+
+    def get(self, request):
+        today = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
+        return Response(data=User.objects.filter(role=UserRole.DOCTOR, date_joined__gte=today).count())
