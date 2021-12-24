@@ -7,4 +7,5 @@ urlpatterns = [
     path('all/', views.get_all_prescriptions, name='all'),
     path('<str:national_code>/patient/', views.get_patient_prescriptions, name='patient'),
     path('<str:national_code>/doctor/', views.get_doctor_prescriptions, name='doctor'),
+    path('<str:d_national_code>/<str:p_national_code>/<str:comment>/create/', views.create_prescription, name='create'),
 ]
