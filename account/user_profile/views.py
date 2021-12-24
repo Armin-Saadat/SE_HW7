@@ -43,6 +43,7 @@ class AuthorizeView(APIView):
         return Response(
             headers={
                 'x-name': request.user.first_name,
+                'x-national-code': request.user.username,
                 'x-role': 'admin' if request.user.is_superuser else request.user.role,
             },
             status=HTTP_200_OK,
@@ -60,7 +61,6 @@ class RetrieveUpdateMyProfileAPIView(RetrieveUpdateAPIView):
 
 class RetrieveProfileAPIView(RetrieveAPIView):
     authentication_classes = [JWTAuthentication]
-    # permission_classes = [IsAuthenticated]
     serializer_class = ProfileSerializer
     queryset = User.objects.all()
 
@@ -74,6 +74,6 @@ class ListDoctorAPIView(ListAPIView):
 
 class ListPatientAPIView(ListAPIView):
     authentication_classes = [JWTAuthentication]
-    # permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated]
     serializer_class = ProfileSerializer
     queryset = User.objects.filter(role=UserRole.PATIENT)
