@@ -63,6 +63,7 @@ class RetrieveProfileAPIView(RetrieveAPIView):
     authentication_classes = [JWTAuthentication]
     serializer_class = ProfileSerializer
     queryset = User.objects.all()
+    lookup_field = "username"
 
 
 class ListDoctorAPIView(ListAPIView):
