@@ -1,6 +1,8 @@
 import logging
+from datetime import datetime
 
-from rest_framework.generics import ListAPIView, CreateAPIView
+from rest_framework.generics import ListAPIView, CreateAPIView, GenericAPIView
+from rest_framework.response import Response
 
 from .models import Prescription
 
@@ -28,3 +30,11 @@ class ListPrescription(ListAPIView):
 class CreatePrescription(CreateAPIView):
     serializer_class = PrescriptionSerializer
     permission_classes = [IsAuthenticated, IsDoctor]
+
+
+class PrescriptionCount(GenericAPIView):
+    permission_classes = [IsAuthenticated, IsAdmin]
+
+    def get(self, request):
+        today = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
+        return Response(data=Prescription.objects.filter(created_at__gte=today).count())

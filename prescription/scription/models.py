@@ -5,6 +5,7 @@ class Prescription(models.Model):
     doctor_national_code = models.CharField(max_length=10)
     drug_list = models.CharField(max_length=200, blank=True, null=True)
     comment = models.CharField(max_length=200, blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.comment
