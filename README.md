@@ -5,11 +5,6 @@ Homework 4 of Software Engineering course.
 
 Requirements: Install Docker
 
-To run the project:
+To run the project: docker-compose up -d —build
 
-'''
-docker-compose up -d —build
-'''
-
-To end the project:
-docker-compse down
+To end the project: docker-compse down
